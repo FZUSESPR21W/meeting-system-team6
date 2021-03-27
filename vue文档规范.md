@@ -63,4 +63,33 @@ props: {
 >对于应用来说，顶级 App 组件和布局组件中的样式可以是全局的，但是其它所有组件都应该是有作用域的。对于组件库，我们应该更倾向于选用基于 class 的策略而不是 scoped attribute。
 
 
->使用模块作用域保持不允许外部访问的函数的私有性。如果无法做到这一点，就始终为插件、混入等不考虑作为对外公共 API 的自定义私有 property 使用 $_ 前缀。并附带一个命名空间以回避和其它作者的冲突 
+>使用模块作用域保持不允许外部访问的函数的私有性。如果无法做到这一点，就始终为插件、混入等不考虑作为对外公共 API 的自定义私有 property 使用 $_ 前缀。并附带一个命名空间以回避和其它作者的冲突
+
+## html文档规范
+>除id、name为驼峰命名法外，标签名及属性名全部字母小写。属性值使用双引号包裹。
+id、name属性为驼峰命名；class为短横分隔命名
+id、name同一页面必须唯一 
+
+```
+<div id="todayNews" class="container-fluid">
+  <input name="username">
+</div>
+```
+
+>同一页面，不同元素，应避免使用相同的 name 与 id
+
+```
+<input name="foo">
+<div id="foo"></div>
+<script>
+// IE6 将显示 INPUT
+alert(document.getElementById('foo').tagName);
+</script>
+```
+
+>代码缩进和换行
+使用 2 个空格做为一个缩进层级，不允许使用 4 个空格 或 tab 字符。
+建议每行不得超过 120 个字符。
+
+>禁止为了 hook 脚本，创建无样式信息的 class
+不允许 class 只用于让 JavaScript 选择某些元素，class 应该具有明确的语义和样式。否则容易导致 css class 泛滥。使用 id、属性选择作为 hook 是更好的方式。
