@@ -20,26 +20,28 @@
 
 <script>
 
+import axios from "axios";
 export default{
 
     data:() => {
         return {
                 userList : [],
-                userUrl : "default/members/1"
+                userUrl : "http://47.96.231.121:8079/default/members/"
         }
     },
 
     created:function(){
+        this.userUrl=this.userUrl+localStorage.getItem("userId");
         this.getUserData();
     },
 
     methods:{
         getUserData(){
-            this.$http
+            axios
         .get(this.userUrl, {
           headers: {
             Authorization:
-              "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoieXp4In0.gkwEKNva7sgdLEoaAfb2cURQVxcPy4XJU9UXrYgAK2M",
+              localStorage.getItem("token"),
           },
         })
         .then((res) => {

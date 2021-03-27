@@ -15,7 +15,7 @@
                     </el-card>
                     </div></el-col>
                 </el-tab-pane>
-                <el-tab-pane label="发布会议" name="second">
+                <el-tab-pane label="信息发布" name="second">
                     <el-card class="box-card">
     <h2>信息发布</h2>
     <el-form ref="form" :model="form" label-width="80px">
@@ -58,7 +58,7 @@
                     </el-card>
                     </div></el-col>
                 </el-tab-pane>
-                <el-tab-pane label="发布会议" name="second">
+                <el-tab-pane label="信息发布" name="second">
                     <el-card class="box-card">
     <h2>信息发布</h2>
     <el-form ref="form" :model="form" label-width="80px">
@@ -88,6 +88,25 @@
         </div>
 
     <div v-if= "role=='secretary'">
+            <el-tabs v-model="activeName" @tab-click="handleClick">
+                <el-tab-pane label="数据显示" name="first">
+                    <el-col :span="16"><div class="grid-content bg-purple">
+                    <el-card class="box-card">
+                        <div id=Numbers>会议参与人数:{{meeting_numbers}}</div>
+                        <div v-for="(item,index) in Subforum" :key="index" class="text item">
+    {{'分论坛标题: ' + item.title }}
+    <br />
+    {{'分论坛主席: ' + item.chairman }}
+  </div>
+                    </el-card>
+                    </div></el-col>
+                </el-tab-pane>
+                
+            </el-tabs>
+            <el-button type="primary" @click="toUserList">查看用户所有信息</el-button>
+        </div>
+
+        <div v-if= "role=='commonMember'">
             <el-tabs v-model="activeName" @tab-click="handleClick">
                 <el-tab-pane label="数据显示" name="first">
                     <el-col :span="16"><div class="grid-content bg-purple">
@@ -138,6 +157,9 @@ export default {
       },
       getSubForm(i){
           return this.Subform[i]
+      },
+      toUserList(){
+         this.$router.push("/userList")
       },
       onSubmit() {
         console.log(this.form)
