@@ -26,18 +26,21 @@
 
 <script>
 import {request}from '../network/request';
+import  axios  from "axios";
 export default {
   data: () => {
     return {
-      notificationUrl: "note/has_note/1",
+      notificationUrl: "note/has_note/",
 
-      readUrl:"note/read/",
+      readUrl:"http://47.96.231.121:8079/note/read/",
 
       notificationList: [],
     };
   },
   created: function () {
+    this.notificationUrl=this.notificationUrl+localStorage.getItem("userId");
     this.getNotificationData();
+
   },
   methods: {
     getNotificationData() {
@@ -62,10 +65,10 @@ export default {
     },
 
     read(scope){
-        this.$http.get(this.readUrl+scope.id,{
+        axios.get(this.readUrl+scope.id,{
           headers: {
             Authorization:
-              "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxIiwic3ViIjoieXp4In0.gkwEKNva7sgdLEoaAfb2cURQVxcPy4XJU9UXrYgAK2M",
+              localStorage.getItem("token"),
           },
         })
         .then( res => {
