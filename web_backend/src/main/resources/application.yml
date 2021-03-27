@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    password: '4343594.'
+    url: jdbc:mysql://localhost:3306/daywork?serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    initialization-mode: always
+  jpa:
+    hibernate:
+      # 创建或更新表
+      ddl-auto: update
+    show-sql: true
+
+
+
+server:
+  port: 8080
+
+
